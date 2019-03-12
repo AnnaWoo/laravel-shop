@@ -17,10 +17,11 @@ Auth::routes();
 Route::get('products', 'ProductsController@index')->name('products.index');
 Route::get('products/{product}', 'ProductsController@show')->name('products.show')->where(['product' => '[0-9]+']);
 
-Route::group(['middleware' => 'auth'], function() {
+Route::group(['middleware' => 'auth','verified'], function() {
     Route::get('/email_verification/send', 'EmailVerificationController@send')->name('email_verification.send');
     Route::get('/email_verify_notice', 'PagesController@emailVerifyNotice')->name('email_verify_notice');
     Route::get('/email_verification/verify', 'EmailVerificationController@verify')->name('email_verification.verify');
+    Route::delete('cart/{sku}', 'CartController@remove')->name('cart.remove');
 
     Route::group(['middleware' => 'email_verified'], function() {
         Route::get('user_addresses', 'UserAddressesController@index')->name('user_addresses.index');
@@ -33,6 +34,7 @@ Route::group(['middleware' => 'auth'], function() {
         Route::delete('products/{product}/favorite', 'ProductsController@disfavor')->name('products.disfavor');
         Route::get('products/favorites', 'ProductsController@favorites')->name('products.favorites');
         Route::post('cart', 'CartController@add')->name('cart.add');
+        Route::get('cart', 'CartController@index')->name('cart.index');
     });
 });
 

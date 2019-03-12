@@ -20,6 +20,9 @@
                     <li><a href="{{ route('login') }}">登录</a></li>
                     <li><a href="{{ route('register') }}">注册</a></li>
                 @else
+                    <li class="nav-item">
+                        <a class="nav-link mt-1" href="{{ route('cart.index') }}"><i class="fa fa-shopping-cart"></i></a>
+                    </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             <span class="user-avatar pull-left" style="margin-right:8px; margin-top:-5px;">
@@ -46,8 +49,8 @@
                             </li>
                         </ul>
                     </li>
-            @endguest
-            <!-- 登录注册链接结束 -->
+                @endguest
+                <!-- 登录注册链接结束 -->
             </ul>
         </div>
     </div>
